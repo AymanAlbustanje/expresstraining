@@ -32,6 +32,23 @@ const getAllBooks = (req: Request ,res:Response ) => {
         books: books
     })
 }
+const deleteBook = (req: Request ,res:Response ) => {
+   const bookId = Number(req.params.id);
+   const bookIndex = books.findIndex((book) => book.id === bookId)
+
+   books.splice(bookIndex, 1)
+
+   if (bookIndex === -1) {
+    res.status(404).json({
+        message: "book not found"
+    })
+}
+
+res.status(200).json({
+    message: "deleted successfully",
+    books: books
+})
+}
 
 const createBook = (req: Request ,res:Response ) => {
     const newBook = {
@@ -47,4 +64,8 @@ const createBook = (req: Request ,res:Response ) => {
         books: books 
     })
 }
-export {filterArrayController,getAllBooks,createBook}
+
+
+
+
+export {filterArrayController,getAllBooks,createBook,deleteBook}

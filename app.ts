@@ -7,11 +7,6 @@ const app: Express = express();
 env.config();
 const PORT = process.env.PORT;
 
-// Route.
-app.get("/", (req: Request, res: Response) => {
-    res.send("hello world");
-});
-
 app.use("/books", bookroute);
 
 app.listen(PORT, () => {
