@@ -57,15 +57,24 @@ const createBook = (req: Request ,res:Response ) => {
         bookName: "Database 2"
     }
 
-    books.push(newBook)
+}
 
-    res.status(201).json({
-        message: "created successfully",
-        books: books 
+const getSingleBook = (req: Request ,res:Response) => {
+    const bookId = Number(req.params.id);
+
+    const book = books.find((book) => book.id === bookId)
+
+    if (!book) {
+        res.status(404).json({
+            message: "book not found"
+        })
+    }
+
+    res.status(200).json({
+        message: "success",
+        book: book
     })
 }
 
 
-
-
-export {filterArrayController,getAllBooks,createBook,deleteBook}
+export {filterArrayController,getAllBooks,createBook,deleteBook,getSingleBook}
